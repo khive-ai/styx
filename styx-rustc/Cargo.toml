@@ -1,0 +1,25 @@
+[package]
+name = "styx-rustc"
+version = "0.1.0"
+edition = "2024"
+description = "Rust → StyxIR extractor via rustc THIR (reads THIR directly, no external tools)"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+# StyxIR types (shared with the main styx translator)
+styx = { path = ".." }
+
+# Serialization for StyxIR output
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Compiler interface — these are resolved from the rustc sysroot
+# by the `extern crate` declarations in main.rs. The rustc-dev
+# component must be installed for the pinned nightly toolchain.
+
+[[bin]]
+name = "styx-rustc"
+path = "src/main.rs"
